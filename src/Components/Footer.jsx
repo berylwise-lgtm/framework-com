@@ -1,8 +1,9 @@
 function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer>
-      <p>© Framework Computer</p>
-    </footer>
+    <p className="text-center m-3 p-3 fw-bold text-muted">
+      © {year} Framework Computer
+    </p>
   );
 }
 
