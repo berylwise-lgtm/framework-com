@@ -4,29 +4,80 @@ function Market() {
   const products = [
     {
       id: 1,
-      name: "Framework Laptop 13",
-      image:
-        "https://images.frame.work/frameworkmarketplace/aeUO651ZCF7ETVrh_fw13-family_overview_highlights_customize.jpg?auto=format%2Ccompress",
+      name: "Framework Laptop 12 (Intel® Core™ Series 3)",
+      image: "https://static.frame.work/vnhapdfuirbckad88ctfkwlb0hjg",
       description:
         "13-inch modular laptop with customizable expansion cards, bezels, and keyboard layouts.",
-      price: 1099,
+      price: 699,
       isAvailable: true,
     },
     {
       id: 2,
+      name: "Framework Laptop 12 DIY Edition (Intel® Core™ Series 3)",
+      image: "https://static.frame.work/dmgr8ou5tmk5podprsmlm0wlq9vw",
+      description:
+        "16-inch performance laptop with upgradeable GPU, memory, and storage for years to come.",
+      price: 549,
+      isAvailable: true,
+    },
+    {
+      id: 3,
+      name: "Framework Laptop 13 Pro DIY Edition (AMD Ryzen™ AI 300 Series)",
+      image: "https://static.frame.work/u2h7dlre8cgys5k97odeo4gqjd0v",
+      description:
+        "12-inch compact laptop — every part is replaceable with just the one tool in the box.",
+      price: 1399,
+      isAvailable: false,
+    },
+    {
+      id: 4,
+      name: "Framework Laptop 13 Pro DIY Edition (Intel® Core™ Ultra Series 3)",
+      image: "https://static.frame.work/p4pbvfiu128s84oplq2jjhtf7n0i",
+      description:
+        "13-inch modular laptop with customizable expansion cards, bezels, and keyboard layouts.",
+      price: 1199,
+      isAvailable: false,
+    },
+    {
+      id: 5,
       name: "Framework Laptop 16",
-      image:
-        "https://images.frame.work/frameworkmarketplace/aeUO7Z1ZCF7ETVrj_fw13-family_overview_highlights_upgrade.jpg?auto=format%2Ccompress",
+      image: "https://static.frame.work/vhz9cwchzrgaz4le82wlqv6ca87a",
       description:
         "16-inch performance laptop with upgradeable GPU, memory, and storage for years to come.",
       price: 1699,
       isAvailable: true,
     },
     {
-      id: 3,
+      id: 6,
       name: "Framework Laptop 12",
-      image:
-        "https://images.frame.work/frameworkmarketplace/aeUO7J1ZCF7ETVri_fw13-family_overview_highlights_repair.jpg?auto=format%2Ccompress",
+      image: "https://static.frame.work/nv9uvkh89deoqihnlnu8vs28agt4",
+      description:
+        "12-inch compact laptop — every part is replaceable with just the one tool in the box.",
+      price: 849,
+      isAvailable: false,
+    },
+    {
+      id: 7,
+      name: "Framework Laptop 13",
+      image: "https://static.frame.work/v1d1q33fcehes9p3ujfj6atumc75",
+      description:
+        "13-inch modular laptop with customizable expansion cards, bezels, and keyboard layouts.",
+      price: 1099,
+      isAvailable: true,
+    },
+    {
+      id: 8,
+      name: "Framework Laptop 16",
+      image: "https://static.frame.work/3tn9i090bln2ml3aowtzoj381jy5",
+      description:
+        "16-inch performance laptop with upgradeable GPU, memory, and storage for years to come.",
+      price: 1699,
+      isAvailable: true,
+    },
+    {
+      id: 9,
+      name: "Framework Laptop 12",
+      image: "https://static.frame.work/5k5bmp0edunqm861pn6sidt7tbwo",
       description:
         "12-inch compact laptop — every part is replaceable with just the one tool in the box.",
       price: 849,
@@ -54,7 +105,7 @@ function Market() {
       ) : (
         products.map((product) => (
           <div
-            className="col-12 col-sm-6 col-lg-4 product-card"
+            className="col-12 col-sm-6 col-lg-4 product-card mb-5"
             key={product.id}
           >
             <ProductCard product={product} />
