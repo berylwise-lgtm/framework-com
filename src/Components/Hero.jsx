@@ -1,23 +1,26 @@
 export default function Hero() {
   return (
     <section className="hero-section py-4" aria-labelledby="hero-title">
-      {/* Changed from container-fluid to container to match other components */}
       <div className="container">
-        <div className="position-relative">
+        <div className="position-relative rounded-4 overflow-hidden">
           <img
-            className="hero-image img-fluid w-100 rounded-4 object-fit-cover"
+            className="hero-image img-fluid w-100 object-fit-cover"
             src="https://images.frame.work/frameworkmarketplace/aJBl86Tt2nPbZzs1_homepage_fw13-banner_desktop.jpg?auto=format%2Ccompress"
             alt="Framework 13 Pro laptop"
-            // Added a minimum height so the text doesn't overflow on small screens
-            style={{ minHeight: "400px" }}
+            // Keeps the image tall enough on all screens so text doesn't spill
+            style={{ minHeight: "350px", objectPosition: "center" }}
           />
 
-          <div className="position-absolute top-50 start-0 translate-middle-y col-10 col-md-6 col-lg-5 ps-4 ps-md-5">
-            <div className="text-white">
-              <h1 id="hero-title" className="fs-2 fw-bold lh-sm text-shadow">
+          <div className="position-absolute top-50 start-0 translate-middle-y ps-3 ps-md-5 w-100">
+            {/* We use a nested div with column widths so text wraps nicely */}
+            <div className="col-11 col-sm-9 col-md-6 col-lg-5 text-white">
+              <h1
+                id="hero-title"
+                className="fs-3 fs-md-2 fw-bold lh-sm text-shadow mb-3"
+              >
                 Framework Laptop 13 isn’t our computer. It’s yours.
               </h1>
-              <p className="text-shadow">
+              <p className="text-shadow mb-4 d-none d-sm-block">
                 Updated for 2025 with AMD's latest Ryzen™ AI 300 Series
                 Processors with up to 12 CPU cores.
               </p>

@@ -4,6 +4,8 @@ import Hero from "./Components/Hero";
 import Market from "./Components/Market";
 import Footer from "./Components/Footer";
 import CartDrawer from "./Components/CartDrawer";
+import Features from "./Components/Features";
+import Highlights from "./Components/Highlights";
 function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -28,6 +30,8 @@ function App() {
       <main className="container app-main">
         <Hero />
         <Market cart={cart} addToCart={addToCart} />
+        <Features />
+        <Highlights />
       </main>
 
       <footer className="mt-4">
