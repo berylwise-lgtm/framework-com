@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 export default function CartDrawer({ isOpen, onClose, cart, removeFromCart }) {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   if (!isOpen) return null;
 
   const cartTotal = cart.reduce((total, item) => total + item.price, 0);
@@ -90,6 +93,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart }) {
               <button
                 className="btn btn-primary w-100 py-2 fw-bold"
                 style={{ backgroundColor: "#e76235", border: "none" }}
+                onClick={() => setIsCheckoutOpen(true)}
               >
                 Proceed to Checkout
               </button>
@@ -97,6 +101,50 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart }) {
           )}
         </div>
       </aside>
+
+      {isCheckoutOpen && (
+        <aside
+          className="offcanvas offcanvas-end show"
+          tabIndex={-1}
+          id="checkoutDrawer"
+          aria-labelledby="checkoutDrawerLabel"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="offcanvas-header border-bottom">
+            <h2
+              className="offcanvas-title fw-bold fs-4"
+              id="checkoutDrawerLabel"
+            >
+              Checkout
+            </h2>
+            <button
+              className="btn-close"
+              type="button"
+              aria-label="Close checkout"
+              onClick={() => setIsCheckoutOpen(false)}
+            />
+          </div>
+          <div className="offcanvas-body">
+            <h3 className="fs-5 fw-bold">Order summary</h3>
+            <ul className="list-group list-group-flush mb-3">
+              {cart.map((item, index) => (
+                <li
+                  key={index}
+                  className="list-group-item d-flex justify-content-between px-0"
+                >
+                  <span>{item.name}</span>
+                  <span>${item.price}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="d-flex justify-content-between border-top pt-3">
+              <span className="fw-bold">Total:</span>
+              <span className="fw-bold">${cartTotal}</span>
+            </div>
+          </div>
+        </aside>
+      )}
     </>
   );
 }
