@@ -1,5 +1,4 @@
 const BASE_URL = "http://localhost:3001";
-
 export const getProducts = () =>
   fetch(`${BASE_URL}/products`).then((res) => res.json());
 

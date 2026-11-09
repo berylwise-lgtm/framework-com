@@ -20,30 +20,55 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Load products and cart from db.json on mount
+  // Load products and cart once when the app starts
   useEffect(() => {
-    getProducts().then(setProducts);
-    getCart().then(setCart);
+    async function loadData() {
+      try {
+        const productsData = await getProducts();
+        setProducts(productsData);
+
+        const cartData = await getCart();
+        setCart(cartData);
+      } catch (error) {
+        console.error("Failed to load data:", error);
+      }
+    }
+
+    loadData();
   }, []);
 
+  // Add a product to the cart
   const handleAddToCart = async (product) => {
-    const item = {
-      productId: product.id,
-      name: product.name,
-      price: product.price,
-    };
-    const saved = await addCartItem(item);
-    setCart((prev) => [...prev, saved]);
+    try {
+      const saved = await addCartItem({
+        productId: product.id,
+        name: product.name,
+        price: product.price,
+      });
+      setCart((prev) => [...prev, saved]);
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+    }
   };
 
+  // Remove a product from the cart
   const handleRemoveFromCart = async (id) => {
-    await deleteCartItem(id);
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    try {
+      await deleteCartItem(id);
+      setCart((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Failed to remove from cart:", error);
+    }
   };
 
+  // Add a new product to the shop
   const handleAddProduct = async (product) => {
-    const saved = await addProduct(product);
-    setProducts((prev) => [...prev, saved]);
+    try {
+      const saved = await addProduct(product);
+      setProducts((prev) => [...prev, saved]);
+    } catch (error) {
+      console.error("Failed to add product:", error);
+    }
   };
 
   return (
