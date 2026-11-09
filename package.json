@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "server": "json-server --watch db.json --port 3001",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
@@ -22,11 +24,13 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.7",
     "eslint": "^10.13.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "gh-pages": "^6.3.0",
     "globals": "^17.13.0",
+    "json-server": "^1.0.0-beta.15",
     "vite": "^8.3.5"
   }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./Components/NavBar";
 import Hero from "./Components/Hero";
 import Market from "./Components/Market";
@@ -6,19 +6,44 @@ import Footer from "./Components/Footer";
 import CartDrawer from "./Components/CartDrawer";
 import Features from "./Components/Features";
 import Highlights from "./Components/Highlights";
+import ProductForm from "./Components/ProductForm";
+import {
+  getProducts,
+  addProduct,
+  getCart,
+  addCartItem,
+  deleteCartItem,
+} from "./api";
+
 function App() {
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const addToCart = (product) => {
-    setCart([...cart, product]);
+  // Load products and cart from db.json on mount
+  useEffect(() => {
+    getProducts().then(setProducts);
+    getCart().then(setCart);
+  }, []);
+
+  const handleAddToCart = async (product) => {
+    const item = {
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+    };
+    const saved = await addCartItem(item);
+    setCart((prev) => [...prev, saved]);
   };
 
-  // 1. New function to remove a specific item from the cart
-  const removeFromCart = (indexToRemove) => {
-    // Keep all items EXCEPT the one at the specified index
-    const updatedCart = cart.filter((_, index) => index !== indexToRemove);
-    setCart(updatedCart);
+  const handleRemoveFromCart = async (id) => {
+    await deleteCartItem(id);
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleAddProduct = async (product) => {
+    const saved = await addProduct(product);
+    setProducts((prev) => [...prev, saved]);
   };
 
   return (
@@ -29,7 +54,8 @@ function App() {
 
       <main className="container app-main">
         <Hero />
-        <Market cart={cart} addToCart={addToCart} />
+        <Market products={products} cart={cart} addToCart={handleAddToCart} />
+        <ProductForm onAdd={handleAddProduct} />
         <Features />
         <Highlights />
       </main>
@@ -38,12 +64,11 @@ function App() {
         <Footer />
       </footer>
 
-      {/* 2. Pass the remove function to the CartDrawer */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         cart={cart}
-        removeFromCart={removeFromCart}
+        removeFromCart={handleRemoveFromCart}
       />
     </>
   );
