@@ -19,10 +19,6 @@ export default function NavBar({ cart, onOpenCart }) {
       </a>
 
       <div className="d-flex gap-3 fs-4">
-        <a href="#account" className="text-dark">
-          <i className="bi bi-person"></i>
-        </a>
-
         {/* Make the bag a button that opens the cart */}
         <button
           className="btn border-0 p-0 fs-4 text-dark position-relative shadow-none"

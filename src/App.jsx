@@ -13,6 +13,7 @@ import {
   getCart,
   addCartItem,
   deleteCartItem,
+  deleteProduct,
 } from "./api";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       const saved = await addCartItem({
         productId: product.id,
         name: product.name,
+        image: product.image,
         price: product.price,
       });
       setCart((prev) => [...prev, saved]);
@@ -71,6 +73,21 @@ function App() {
     }
   };
 
+  const handleProductUpdated = (updatedProduct) => {
+    setProducts((currentProducts) =>
+      currentProducts.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+  };
+
+  const handleProductDeleted = async (id) => {
+    await deleteProduct(id);
+    setProducts((currentProducts) =>
+      currentProducts.filter((product) => product.id !== id)
+    );
+  };
+
   return (
     <>
       <header className="app-header py-3 py-md-4">
@@ -79,8 +96,17 @@ function App() {
 
       <main className="container app-main">
         <Hero />
-        <Market products={products} cart={cart} addToCart={handleAddToCart} />
-        <ProductForm onAdd={handleAddProduct} />
+        <Market
+          products={products}
+          cart={cart}
+          addToCart={handleAddToCart}
+          onProductUpdated={handleProductUpdated}
+          onProductDeleted={handleProductDeleted}
+        />
+        <div className="m-2">
+          <h1 className="text-center">Add Product</h1>
+          <ProductForm onAdd={handleAddProduct} />
+        </div>
         <Features />
         <Highlights />
       </main>

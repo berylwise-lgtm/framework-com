@@ -42,23 +42,24 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart }) {
             </div>
           ) : (
             <ul className="list-group list-group-flush mb-auto">
-              {/* We add 'index' so we know exactly which item to remove */}
-              {cart.map((item, index) => (
+              {cart.map((item) => (
                 <li
-                  key={index}
+                  key={item.id}
                   className="list-group-item d-flex justify-content-between align-items-center px-0 py-3"
                 >
                   <div className="d-flex align-items-center gap-3">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "cover",
-                      }}
-                      className="rounded"
-                    />
+                    {item.image?.trim() && (
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        style={{
+                          width: "60px",
+                          height: "60px",
+                          objectFit: "cover",
+                        }}
+                        className="rounded"
+                      />
+                    )}
                     <div>
                       <h6
                         className="mb-1 fw-bold text-truncate"
@@ -73,7 +74,7 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart }) {
                   {/* Trash button to remove the item */}
                   <button
                     className="btn btn-sm btn-outline-danger border-0"
-                    onClick={() => removeFromCart(index)}
+                    onClick={() => removeFromCart(item.id)}
                     aria-label="Remove item"
                     title="Remove from cart"
                   >
@@ -128,9 +129,9 @@ export default function CartDrawer({ isOpen, onClose, cart, removeFromCart }) {
           <div className="offcanvas-body">
             <h3 className="fs-5 fw-bold">Order summary</h3>
             <ul className="list-group list-group-flush mb-3">
-              {cart.map((item, index) => (
+              {cart.map((item) => (
                 <li
-                  key={index}
+                  key={item.id}
                   className="list-group-item d-flex justify-content-between px-0"
                 >
                   <span>{item.name}</span>

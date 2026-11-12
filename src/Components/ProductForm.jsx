@@ -6,11 +6,15 @@ function ProductForm({ onAdd }) {
     image: "",
     description: "",
     price: "",
+    isAvailable: true,
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -23,10 +27,16 @@ function ProductForm({ onAdd }) {
       image: form.image.trim(),
       description: form.description.trim(),
       price: Number(form.price),
-      isAvailable: true,
+      isAvailable: form.isAvailable,
     });
 
-    setForm({ name: "", image: "", description: "", price: "" });
+    setForm({
+      name: "",
+      image: "",
+      description: "",
+      price: "",
+      isAvailable: true,
+    });
   };
 
   return (
@@ -88,6 +98,20 @@ function ProductForm({ onAdd }) {
           onChange={handleChange}
           required
         />
+      </div>
+
+      <div className="form-check mb-3">
+        <input
+          id="product-availability"
+          name="isAvailable"
+          type="checkbox"
+          className="form-check-input"
+          checked={form.isAvailable}
+          onChange={handleChange}
+        />
+        <label htmlFor="product-availability" className="form-check-label">
+          Available
+        </label>
       </div>
 
       <button type="submit" className="btn btn-primary">

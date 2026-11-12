@@ -1,6 +1,12 @@
 import ProductCard from "./ProductCard";
 
-function Market({ products, cart, addToCart }) {
+function Market({
+  products,
+  cart,
+  addToCart,
+  onProductUpdated,
+  onProductDeleted,
+}) {
   const cartTotal = cart.reduce((total, item) => total + item.price, 0);
 
   return (
@@ -21,7 +27,11 @@ function Market({ products, cart, addToCart }) {
 
       {products.map((product) => (
         <div className="col-12 col-sm-6 col-lg-4 mb-5" key={product.id}>
-          <ProductCard product={product} />
+          <ProductCard
+            product={product}
+            onProductUpdated={onProductUpdated}
+            onProductDeleted={onProductDeleted}
+          />
           <button
             type="button"
             className="btn btn-primary mt-2 w-100"
